@@ -4,6 +4,9 @@ package com.CodeWallah.LibraryDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -30,5 +33,15 @@ public class BookService {
     public Book getBookById(Integer id) throws Exception{
         Book book = bookRepository.findById(id).get();
         return book;
+    }
+
+    public List<BookAuthorObject> getBookAndAuthor(){
+        List<Book> bookList = bookRepository.findAll();
+        List<BookAuthorObject> bookAuthorObjectList = new ArrayList<>();
+        for (Book book: bookList) {
+            BookAuthorObject bookAuthorObject = new BookAuthorObject(book.getName(), book.getAuthor());
+            bookAuthorObjectList.add(bookAuthorObject);
+        }
+        return bookAuthorObjectList;
     }
 }

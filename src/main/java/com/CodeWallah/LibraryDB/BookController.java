@@ -4,6 +4,9 @@ package com.CodeWallah.LibraryDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -35,5 +38,10 @@ public class BookController {
 //        return null;
     }
 
+    @GetMapping("/get_book_name_and_authors")
+    public List<BookAuthorObject> getBookNameAndAuthors(){
+        List<BookAuthorObject> list = bookService.getBookAndAuthor();
 
+        return list;
+    }
 }
